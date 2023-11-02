@@ -1,4 +1,4 @@
-name: Deploy to Live Channel
+name: Deploy to Live Channel v2
 
 on:
     push:
