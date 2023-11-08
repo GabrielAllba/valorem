@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Fragment, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
+import Link from 'next/link';
 
 const permohonan = [
     { id: 1, name: 'Paten' },
@@ -14,7 +15,7 @@ export default function Hero() {
     const [selected, setSelected] = useState(permohonan[0]);
 
     return (
-        <section className="bg-white py-16 min-h">
+        <section className="bg-white py-16">
             <div className="grid max-w-screen-xl px-8 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
                 <div className="mr-auto place-self-center lg:col-span-7">
                     <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 mb-4  font-poppins px-4 py-2">
@@ -38,11 +39,7 @@ export default function Hero() {
                             viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg"
                         >
-                            <path
-                                fill-rule="evenodd"
-                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                clip-rule="evenodd"
-                            ></path>
+                            <path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"></path>
                         </svg>
                     </a>
                 </div>
@@ -71,7 +68,6 @@ export default function Hero() {
                                         id="kata_kunci"
                                         className=" border border-[#DADDE2] text-gray-900 text-sm rounded-lg  block w-full p-2.5 outline-none font-poppins"
                                         placeholder="Kata kunci"
-                                        required
                                     ></input>
                                 </div>
                                 <div className="">
@@ -141,12 +137,12 @@ export default function Hero() {
                                 </div>
 
                                 <div className="flex justify-end items-center">
-                                    <button
-                                        type="submit"
+                                    <Link
+                                        href="/hasil_pencarian"
                                         className="text-white bg-[#1D6363] hover:bg-[#236f6f] outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  mt-4 font-poppins"
                                     >
                                         Cari
-                                    </button>
+                                    </Link>
                                 </div>
                             </form>
                         </div>

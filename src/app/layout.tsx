@@ -1,23 +1,16 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
-import NavigationBar from './components/user/navigation_bar';
-import Footer from './components/user/footer';
-
-const inter = Inter({ subsets: ['latin'] });
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Valorem',
-    description: '',
+    title: '...',
+    description: '...',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en" className="bg-[#161C28]">
-            <body className={inter.className}>
-                <NavigationBar></NavigationBar>
+        <html lang="en" className="bg-white">
+            <body>
                 <div>{children}</div>
-                <Footer></Footer>
             </body>
         </html>
     );
