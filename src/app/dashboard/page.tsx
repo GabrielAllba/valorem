@@ -61,6 +61,7 @@ interface ValuasiHakCipta {
     pencipta: Pencipta[];
     lampiran: Lampiran;
     kuasa?: Kuasa;
+    nilai_valuasi: number;
 }
 
 const hak_cipta = [
@@ -138,12 +139,13 @@ export default function Dashboard() {
         pencipta: pencipta,
         lampiran: lampiran,
         kuasa: kuasa,
+        nilai_valuasi: 0,
     });
 
     const addItem = async (e: any) => {
         e.preventDefault();
 
-        const { detail_permohonan, kuasa, lampiran, pencipta } = valuasiHakCipta;
+        const { detail_permohonan, kuasa, lampiran, pencipta, nilai_valuasi } = valuasiHakCipta;
 
         setIsSubmitting(true);
         await addDoc(collection(db, 'valuasi_hak_cipta'), {
@@ -151,6 +153,7 @@ export default function Dashboard() {
             kuasa,
             lampiran,
             pencipta,
+            nilai_valuasi,
         });
         setIsSubmitting(false);
     };
@@ -182,6 +185,7 @@ export default function Dashboard() {
             pencipta: pencipta,
             lampiran: lampiran,
             kuasa: kuasa,
+            nilai_valuasi: 0,
         });
     }, [detailPermohonan, pencipta, lampiran, kuasa]);
 

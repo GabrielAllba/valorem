@@ -36,21 +36,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <>
             <NavBar sidebar={sidebar} toggleSidebar={toggleSidebar}></NavBar>
             <div className={`bg-[#f8fff8] ${sidebar === 'active' ? 'lg:pl-64' : ''}`}>
-                <div className="p-8 pt-24 min-h-screen">
-                    {loading && (
-                        <>
-                            <div className="grid grid-cols-2 gap-4">
-                                <Skeleton variant="rectangular" className="w-full" height={200} />
-                                <Skeleton variant="rectangular" className="w-full" height={200} />
-                                <Skeleton variant="rectangular" className="w-full" height={200} />
-                                <Skeleton variant="rectangular" className="w-full" height={200} />
-                                <Skeleton variant="rectangular" className="w-full" height={200} />
-                                <Skeleton variant="rectangular" className="w-full" height={200} />
-                            </div>
-                        </>
-                    )}
-                    {!loading && children}
-                </div>
+                <div className="p-8 pt-24 min-h-screen">{children}</div>
             </div>
         </>
     );
