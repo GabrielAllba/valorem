@@ -1,39 +1,40 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import NavBar from "../components/admin/navbar";
+import { useState, useEffect, ReactNode } from "react";
 
-import NavBar from '../components/admin/navbar';
+const Layout = ({ children }: { children: ReactNode }) => {
+  const [sidebar, setSidebar] = useState("active");
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-    const [sidebar, setSidebar] = useState('active');
+  const updateSidebar = () => {
+    if (window.innerWidth < 1024) {
+      setSidebar("not-active");
+    } else {
+      setSidebar("active");
+    }
+  };
 
-    const updateSidebar = () => {
-        if (window.innerWidth < 1024) {
-            setSidebar('not-active');
-        } else {
-            setSidebar('active');
-        }
+  useEffect(() => {
+    updateSidebar();
+    window.addEventListener("resize", updateSidebar);
+
+    return () => {
+      window.removeEventListener("resize", updateSidebar);
     };
+  }, []);
 
-    useEffect(() => {
-        updateSidebar();
-        window.addEventListener('resize', updateSidebar);
+  const toggleSidebar = () => {
+    setSidebar(sidebar === "active" ? "not-active" : "active");
+  };
 
-        return () => {
-            window.removeEventListener('resize', updateSidebar);
-        };
-    }, []);
+  return (
+    <>
+      <NavBar sidebar={sidebar} toggleSidebar={toggleSidebar}></NavBar>
+      <div className={`bg-[#f8fff8] ${sidebar === "active" ? "lg:pl-64" : ""}`}>
+        <div className="min-h-screen p-8 pt-24">{children}</div>
+      </div>
+    </>
+  );
+};
 
-    const toggleSidebar = () => {
-        setSidebar(sidebar === 'active' ? 'not-active' : 'active');
-    };
-
-    return (
-        <>
-            <NavBar sidebar={sidebar} toggleSidebar={toggleSidebar}></NavBar>
-            <div className={`bg-[#f8fff8] ${sidebar === 'active' ? 'lg:pl-64' : ''}`}>
-                <div className="p-8 pt-24 min-h-screen">{children}</div>
-            </div>
-        </>
-    );
-}
+export default Layout;

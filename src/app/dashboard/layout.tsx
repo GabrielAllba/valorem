@@ -1,44 +1,86 @@
-'use client';
-import { useState, useEffect } from 'react';
-import NavBar from '../components/user/dashboard/navbar';
-import { app } from '../../../firebase/clientApp';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { useRouter } from 'next/navigation';
-import { redirect } from 'next/navigation';
+"use client";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-    const auth = getAuth(app);
-    const [user, setUser] = useState(false);
+import NavBar from "../components/user/dashboard/navbar";
+import { auth } from "@/firebase/clientApp";
+import { User } from "firebase/auth";
+import { useState, useEffect, ReactNode } from "react";
 
-    const [sidebar, setSidebar] = useState('active');
+const Layout = ({ children }: { children: ReactNode }) => {
+  // TODO: What the hell is this?
+  // const auth = getAuth(app);
 
-    const updateSidebar = () => {
-        if (window.innerWidth < 1024) {
-            setSidebar('not-active');
-        } else {
-            setSidebar('active');
-        }
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [accessToken, setAccessToken] = useState<string>("");
+
+  const [user, setUser] = useState<User>(null!);
+
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      setIsLoading(false);
+      setUser(user);
+
+      user.getIdTokenResult().then((idTokenResult) => {
+        setAccessToken(idTokenResult.token);
+      });
+    } else {
+      setIsLoading(false);
+    }
+  });
+
+  const [sidebar, setSidebar] = useState("active");
+
+  const updateSidebar = () => {
+    if (window.innerWidth < 1024) {
+      setSidebar("not-active");
+    } else {
+      setSidebar("active");
+    }
+  };
+
+  useEffect(() => {
+    updateSidebar();
+    window.addEventListener("resize", updateSidebar);
+
+    return () => {
+      window.removeEventListener("resize", updateSidebar);
     };
+  }, []);
 
-    useEffect(() => {
-        updateSidebar();
-        window.addEventListener('resize', updateSidebar);
+  const toggleSidebar = () => {
+    setSidebar(sidebar === "active" ? "not-active" : "active");
+  };
 
-        return () => {
-            window.removeEventListener('resize', updateSidebar);
-        };
-    }, []);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-    const toggleSidebar = () => {
-        setSidebar(sidebar === 'active' ? 'not-active' : 'active');
-    };
+  if (!user || !accessToken) {
+    return window.location.replace("/");
+  }
 
-    return (
-        <>
-            <NavBar sidebar={sidebar} toggleSidebar={toggleSidebar}></NavBar>
-            <div className={`bg-[#f8fff8] ${sidebar === 'active' ? 'lg:pl-64' : ''}`}>
-                <div className="p-8 pt-24 min-h-screen">{children}</div>
-            </div>
-        </>
-    );
-}
+  return (
+    <>
+      <NavBar sidebar={sidebar} toggleSidebar={toggleSidebar}></NavBar>
+      <div className={`bg-[#f8fff8] ${sidebar === "active" ? "lg:pl-64" : ""}`}>
+        <div className="min-h-screen p-8 pt-24">
+          {/* Proof that user is logged in. */}
+          <h1 className="mb-4 font-semibold text-black">{user.uid}</h1>
+          <h1 className="mb-4 font-semibold text-black">{accessToken}</h1>
+          <h1 className="mb-4 font-semibold text-black">{user.displayName}</h1>
+          <h1 className="mb-4 font-semibold text-black">{user.phoneNumber}</h1>
+          <h1 className="mb-4 font-semibold text-black">{user.email}</h1>
+          <img
+            alt="avatar"
+            className="mb-4 h-64 w-64"
+            referrerPolicy="no-referrer"
+            src={user.photoURL || undefined}
+          />
+
+          {children}
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Layout;

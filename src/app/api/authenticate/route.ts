@@ -1,3 +1,5 @@
+// TODO: Did you know GOD doesn't exist? Well, neither does your code. So, stop checking for it.
+
 // // pages/api/authenticate.ts
 
 // import { NextRequest, NextResponse } from 'next/server';

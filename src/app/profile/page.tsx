@@ -1,26 +1,28 @@
-'use client';
+// TODO: smh, this is not working, I need to figure out how to use firebase in nextjs
 
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { app } from '../../../firebase/clientApp';
-import { useEffect, useState } from 'react';
-import { redirect } from 'next/navigation';
+// "use client";
 
-export default function Profile() {
-    const auth = getAuth(app);
-    const [user, setUser] = useState(false);
+// import { app } from "../../../firebase/clientApp";
+// import { getAuth, onAuthStateChanged } from "firebase/auth";
+// import { redirect } from "next/navigation";
+// import { useEffect, useState } from "react";
 
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setUser(true);
-            } else {
-            }
-        });
-    }, []); //
+// export default function Profile() {
+//   const auth = getAuth(app);
+//   const [user, setUser] = useState(false);
 
-    if (user) {
-        return <h1>hello world</h1>;
-    } else {
-        return <h1>not auth</h1>;
-    }
-}
+//   useEffect(() => {
+//     onAuthStateChanged(auth, (user) => {
+//       if (user) {
+//         setUser(true);
+//       } else {
+//       }
+//     });
+//   }, []); //
+
+//   if (user) {
+//     return <h1>hello world</h1>;
+//   } else {
+//     return <h1>not auth</h1>;
+//   }
+// }

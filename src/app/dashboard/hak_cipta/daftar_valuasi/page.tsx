@@ -1,176 +1,177 @@
-'use client';
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+"use client";
 
-import { db } from '../../../../../firebase/clientApp';
-import { collection, getDocs } from 'firebase/firestore';
-import { DataGrid, GridActionsCellItem, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
+import { db } from "@/firebase/clientApp";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+import { DataGrid, GridActionsCellItem, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+import { collection, getDocs } from "firebase/firestore";
+import * as React from "react";
+import { useState, useEffect } from "react";
 
 interface Kewarganegaraan {
-    id: number | string;
-    nama: string;
+  id: number | string;
+  nama: string;
 }
 
 interface Pencipta {
-    id: number | string;
-    nama: string;
-    alamat: string;
-    nomor_telepon: string;
-    email: string;
-    kewarganegaraan: string;
+  id: number | string;
+  nama: string;
+  alamat: string;
+  nomor_telepon: string;
+  email: string;
+  kewarganegaraan: string;
 }
 interface DetailPermohonan {
-    id: number | string;
-    tipe: string;
-    nama_ciptaan: string;
-    deskripsi_singkat: string;
-    deskripsi: string;
-    tanggal_pertama_diumumkan: string;
-    negara_pertama_diumumkan: string;
+  id: number | string;
+  tipe: string;
+  nama_ciptaan: string;
+  deskripsi_singkat: string;
+  deskripsi: string;
+  tanggal_pertama_diumumkan: string;
+  negara_pertama_diumumkan: string;
 }
 
 interface Kuasa {
-    id: number | string;
-    nama_kuasa: string;
-    alamat_kuasa: string;
-    email_kuasa: string;
+  id: number | string;
+  nama_kuasa: string;
+  alamat_kuasa: string;
+  email_kuasa: string;
 }
 
 interface Lampiran {
-    id: number | string;
-    surat_pernyataan: string;
-    ktp_pencipta: string;
-    surat_kuasa?: string;
+  id: number | string;
+  surat_pernyataan: string;
+  ktp_pencipta: string;
+  surat_kuasa?: string;
 }
 
 interface ValuasiHakCipta {
-    id: number | string;
-    detail_permohonan: DetailPermohonan;
-    pencipta: Pencipta[];
-    lampiran: Lampiran;
-    kuasa?: Kuasa;
-    nilai_valuasi: number;
+  id: number | string;
+  detail_permohonan: DetailPermohonan;
+  pencipta: Pencipta[];
+  lampiran: Lampiran;
+  kuasa?: Kuasa;
+  nilai_valuasi: number;
 }
 interface ShowData {
-    id: number | string;
-    tipe: string;
-    nama_ciptaan: string;
-    deskripsi_singkat: string;
-    deskripsi: string;
-    tanggal_pertama_diumumkan: string;
-    negara_pertama_diumumkan: string;
-    nilai_valuasi: number;
+  id: number | string;
+  tipe: string;
+  nama_ciptaan: string;
+  deskripsi_singkat: string;
+  deskripsi: string;
+  tanggal_pertama_diumumkan: string;
+  negara_pertama_diumumkan: string;
+  nilai_valuasi: number;
 }
 
 const MyTable = ({ rows, columns }: { rows: any[]; columns: any }) => {
-    return (
-        <div style={{ width: '100%' }}>
-            <DataGrid
-                getRowId={(row) => row.id}
-                rows={rows}
-                columns={columns}
-                initialState={{
-                    pagination: {
-                        paginationModel: { page: 0, pageSize: 5 },
-                    },
-                }}
-                pageSizeOptions={[5, 10]}
-            />
-        </div>
-    );
+  return (
+    <div style={{ width: "100%" }}>
+      <DataGrid
+        columns={columns}
+        getRowId={(row) => row.id}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 5 },
+          },
+        }}
+        pageSizeOptions={[5, 10]}
+        rows={rows}
+      />
+    </div>
+  );
 };
 
-export default function DaftarValuasiHakCipta() {
-    const columns: GridColDef[] = [
-        { field: 'id', headerName: 'No Valuasi', width: 220 },
-        { field: 'nama_ciptaan', headerName: 'Nama Hak Cipta', width: 200 },
-        { field: 'tanggal_pertama_diumumkan', headerName: 'Tanggal Pertama Diumumkan', width: 250 },
-        {
-            field: 'tipe',
-            headerName: 'Jenis Ciptaan',
-            width: 200,
-        },
-        {
-            field: 'nilai_valuasi',
-            headerName: 'Nilai Valuasi',
-            description: 'This column has a value getter and is not sortable.',
-            sortable: false,
-            width: 160,
-            renderCell: (params: GridRenderCellParams<any, any>) => {
-                if (params.value == 0) {
-                    return (
-                        <span className="flex items-center rounded-md bg-[#F8F3EE] px-2 py-1 text-xs font-medium text-[#DD9246] ring-1 ring-inset ring-[#ffe4c7]   font-poppins ">
-                            menunggu valuasi
-                        </span>
-                    );
-                } else {
-                    return 'Rp.' + params.value;
-                }
-            },
-        },
-        {
-            headerName: 'Aksi',
-            field: 'actions',
-            type: 'actions',
-            width: 200,
-            getActions: () => [<GridActionsCellItem icon={<RemoveRedEyeIcon />} label="Edit" />],
-        },
-    ];
+const DaftarValuasiHakCipta = () => {
+  const columns: GridColDef[] = [
+    { field: "id", headerName: "No Valuasi", width: 220 },
+    { field: "nama_ciptaan", headerName: "Nama Hak Cipta", width: 200 },
+    { field: "tanggal_pertama_diumumkan", headerName: "Tanggal Pertama Diumumkan", width: 250 },
+    {
+      field: "tipe",
+      headerName: "Jenis Ciptaan",
+      width: 200,
+    },
+    {
+      field: "nilai_valuasi",
+      headerName: "Nilai Valuasi",
+      description: "This column has a value getter and is not sortable.",
+      sortable: false,
+      width: 160,
+      renderCell: (params: GridRenderCellParams<any, any>) => {
+        if (params.value == 0) {
+          return (
+            <span className="flex items-center rounded-md bg-[#F8F3EE] px-2 py-1 font-poppins text-xs font-medium text-[#DD9246] ring-1 ring-inset   ring-[#ffe4c7] ">
+              menunggu valuasi
+            </span>
+          );
+        } else {
+          return "Rp." + params.value;
+        }
+      },
+    },
+    {
+      headerName: "Aksi",
+      field: "actions",
+      type: "actions",
+      width: 200,
+      getActions: () => [<GridActionsCellItem icon={<RemoveRedEyeIcon />} label="Edit" />],
+    },
+  ];
 
-    const [rows, setRows] = useState<ShowData[]>([]);
-    const [loading, setLoading] = useState(true);
+  const [rows, setRows] = useState<ShowData[]>([]);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const getValuasiData = async () => {
-            const querySnapshot = await getDocs(collection(db, 'valuasi_hak_cipta'));
+  useEffect(() => {
+    const getValuasiData = async () => {
+      const querySnapshot = await getDocs(collection(db, "valuasi_hak_cipta"));
 
-            const rows = querySnapshot.docs.map((doc) => {
-                const { detail_permohonan, pencipta, lampiran, kuasa, nilai_valuasi } = doc.data();
-                const {
-                    deskripsi,
-                    deskripsi_singkat,
-                    nama_ciptaan,
-                    negara_pertama_diumumkan,
-                    tanggal_pertama_diumumkan,
-                    tipe,
-                } = detail_permohonan;
-                return {
-                    id: doc.id,
-                    deskripsi,
-                    deskripsi_singkat,
-                    nama_ciptaan,
-                    negara_pertama_diumumkan,
-                    tanggal_pertama_diumumkan,
-                    tipe,
-                    nilai_valuasi,
-                };
-            });
-            setRows(rows);
+      const rows = querySnapshot.docs.map((doc) => {
+        const { detail_permohonan, pencipta, lampiran, kuasa, nilai_valuasi } = doc.data();
+        const {
+          deskripsi,
+          deskripsi_singkat,
+          nama_ciptaan,
+          negara_pertama_diumumkan,
+          tanggal_pertama_diumumkan,
+          tipe,
+        } = detail_permohonan;
+        return {
+          id: doc.id,
+          deskripsi,
+          deskripsi_singkat,
+          nama_ciptaan,
+          negara_pertama_diumumkan,
+          tanggal_pertama_diumumkan,
+          tipe,
+          nilai_valuasi,
         };
-        getValuasiData();
-    }, []);
+      });
+      setRows(rows);
+    };
+    getValuasiData();
+  }, []);
 
-    return (
-        <div className="text-black bg-white shadow-lg">
-            <div className=" bg-white">
-                <div className="p-4 border-b">
-                    <p className="font-semibold text-[#1D6363] ">Data Valuasi Hak Cipta</p>
-                </div>
-                <div className="p-4 overflow-auto">
-                    {/* {loading && (
+  return (
+    <div className="bg-white text-black shadow-lg">
+      <div className=" bg-white">
+        <div className="border-b p-4">
+          <p className="font-semibold text-[#1D6363] ">Data Valuasi Hak Cipta</p>
+        </div>
+        <div className="overflow-auto p-4">
+          {/* {loading && (
                         <div className="w-full flex justify-center">
                             <Box sx={{ display: 'flex justify-center' }}>
                                 <CircularProgress />
                             </Box>
                         </div>
                     )} */}
-                    <MyTable rows={rows} columns={columns}></MyTable>
-                </div>
-            </div>
+          <MyTable columns={columns} rows={rows}></MyTable>
         </div>
-    );
-}
+      </div>
+    </div>
+  );
+};
+
+export default DaftarValuasiHakCipta;
