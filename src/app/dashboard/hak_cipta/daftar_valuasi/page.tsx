@@ -6,9 +6,9 @@ import { db } from '../../../../../firebase/clientApp';
 import { collection, getDocs } from 'firebase/firestore';
 import { DataGrid, GridActionsCellItem, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 
-import EditIcon from '@mui/icons-material/Edit';
-
-import DeleteIcon from '@mui/icons-material/Delete';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 interface Kewarganegaraan {
     id: number | string;
@@ -68,7 +68,7 @@ interface ShowData {
 
 const MyTable = ({ rows, columns }: { rows: any[]; columns: any }) => {
     return (
-        <div style={{ height: '100%', width: '100%' }}>
+        <div style={{ width: '100%' }}>
             <DataGrid
                 rows={rows}
                 columns={columns}
@@ -116,7 +116,7 @@ export default function DaftarValuasiHakCipta() {
             field: 'actions',
             type: 'actions',
             width: 200,
-            getActions: () => [<GridActionsCellItem icon={<EditIcon />} label="Edit" />],
+            getActions: () => [<GridActionsCellItem icon={<RemoveRedEyeIcon />} label="Edit" />],
         },
     ];
 
@@ -150,7 +150,9 @@ export default function DaftarValuasiHakCipta() {
             });
             setRows(rows);
         };
+        setLoading(true);
         getValuasiData();
+        setLoading(false);
     }, []);
 
     return (
@@ -160,7 +162,14 @@ export default function DaftarValuasiHakCipta() {
                     <p className="font-semibold text-[#1D6363] ">Data Valuasi Hak Cipta</p>
                 </div>
                 <div className="p-4 overflow-auto">
-                    <MyTable rows={rows} columns={columns}></MyTable>
+                    {loading && (
+                        <div className="w-full flex justify-center">
+                            <Box sx={{ display: 'flex justify-center' }}>
+                                <CircularProgress />
+                            </Box>
+                        </div>
+                    )}
+                    {!loading && <MyTable rows={rows} columns={columns}></MyTable>}
                 </div>
             </div>
         </div>

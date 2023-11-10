@@ -14,6 +14,7 @@ import { Transition } from '@headlessui/react';
 import Modal from './modal';
 import { useRouter } from 'next/navigation';
 import { auth } from '../../../../firebase/clientApp';
+import axios from 'axios';
 
 interface NavigationItem {
     id: number | string;
@@ -65,13 +66,16 @@ export default function NavigationBar() {
     };
 
     const openSignIn = async () => {
+        const auth = getAuth();
+
         const provider = new GoogleAuthProvider();
         try {
             const result = await signInWithPopup(auth, provider);
             const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential!.accessToken;
+            const token = credential?.accessToken;
             const user = result.user;
-            console.log(user);
+
+            // await sendTokenToServer(user.email!);
 
             setTipe('Sukses');
             setMessage('Berhasil Login!');
@@ -80,12 +84,20 @@ export default function NavigationBar() {
             const errorCode = error.code;
             const errorMessage = error.message;
             const email = error.email;
-            setTipe('Gagal');
-            setMessage('Email sudah digunakan!');
             setOpen(true);
         }
     };
 
+    // const sendTokenToServer = async (email: string) => {
+    //     try {
+    //         const response = await axios.post('http://localhost:3000/api/authenticate', { email });
+    //         console.log(response);
+
+    //         // Cookies.set('authToken', response.data.token);
+    //     } catch (error) {
+    //         console.error('Error sending token to server:', error);
+    //     }
+    // };
     // is login
 
     const [login, setLogin] = useState('undefined');
