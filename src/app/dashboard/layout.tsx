@@ -20,13 +20,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         }
     };
 
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            setUser(true);
-        } else {
-        }
-    });
-
     useEffect(() => {
         updateSidebar();
         window.addEventListener('resize', updateSidebar);
@@ -39,16 +32,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     const toggleSidebar = () => {
         setSidebar(sidebar === 'active' ? 'not-active' : 'active');
     };
-    if (user) {
-        return (
-            <>
-                <NavBar sidebar={sidebar} toggleSidebar={toggleSidebar}></NavBar>
-                <div className={`bg-[#f8fff8] ${sidebar === 'active' ? 'lg:pl-64' : ''}`}>
-                    <div className="p-8 pt-24 min-h-screen">{children}</div>
-                </div>
-            </>
-        );
-    } else {
-        redirect('/');
-    }
+
+    return (
+        <>
+            <NavBar sidebar={sidebar} toggleSidebar={toggleSidebar}></NavBar>
+            <div className={`bg-[#f8fff8] ${sidebar === 'active' ? 'lg:pl-64' : ''}`}>
+                <div className="p-8 pt-24 min-h-screen">{children}</div>
+            </div>
+        </>
+    );
 }
