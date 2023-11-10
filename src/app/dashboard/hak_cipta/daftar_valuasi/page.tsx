@@ -70,6 +70,7 @@ const MyTable = ({ rows, columns }: { rows: any[]; columns: any }) => {
     return (
         <div style={{ width: '100%' }}>
             <DataGrid
+                getRowId={(row) => row.id}
                 rows={rows}
                 columns={columns}
                 initialState={{
