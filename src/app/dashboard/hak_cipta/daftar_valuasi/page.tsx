@@ -151,9 +151,7 @@ export default function DaftarValuasiHakCipta() {
             });
             setRows(rows);
         };
-        setLoading(true);
         getValuasiData();
-        setLoading(false);
     }, []);
 
     return (
@@ -163,14 +161,14 @@ export default function DaftarValuasiHakCipta() {
                     <p className="font-semibold text-[#1D6363] ">Data Valuasi Hak Cipta</p>
                 </div>
                 <div className="p-4 overflow-auto">
-                    {loading && (
+                    {/* {loading && (
                         <div className="w-full flex justify-center">
                             <Box sx={{ display: 'flex justify-center' }}>
                                 <CircularProgress />
                             </Box>
                         </div>
-                    )}
-                    {!loading && <MyTable rows={rows} columns={columns}></MyTable>}
+                    )} */}
+                    <MyTable rows={rows} columns={columns}></MyTable>
                 </div>
             </div>
         </div>
