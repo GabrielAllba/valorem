@@ -2,6 +2,8 @@
 
 import { db } from "@/firebase/clientApp";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import { LinearProgress } from "@mui/material";
+import { Box } from "@mui/system";
 import { DataGrid, GridActionsCellItem, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { collection, getDocs } from "firebase/firestore";
 import * as React from "react";
@@ -37,6 +39,7 @@ const MyTable = ({ rows, columns }: { rows: any[]; columns: any }) => {
 };
 
 const DaftarValuasiHakCipta = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const columns: GridColDef[] = [
     { field: "id", headerName: "No Valuasi", width: 220 },
     { field: "nama_ciptaan", headerName: "Nama Hak Cipta", width: 200 },
@@ -77,6 +80,7 @@ const DaftarValuasiHakCipta = () => {
 
   useEffect(() => {
     const getValuasiData = async () => {
+      
       const querySnapshot = await getDocs(collection(db, "valuasi_hak_cipta"));
 
       const rows = querySnapshot.docs.map((doc) => {
@@ -103,9 +107,11 @@ const DaftarValuasiHakCipta = () => {
       });
       setRows(rows);
     };
+    setIsLoading(true);
     getValuasiData();
+    setIsLoading(false);
   }, []);
-
+  
   return (
     <div className="bg-white text-black shadow-lg">
       <div className=" bg-white">
@@ -113,13 +119,13 @@ const DaftarValuasiHakCipta = () => {
           <p className="font-semibold text-[#1D6363] ">Data Valuasi Hak Cipta</p>
         </div>
         <div className="overflow-auto p-4">
-          {/* {loading && (
-                        <div className="w-full flex justify-center">
-                            <Box sx={{ display: 'flex justify-center' }}>
-                                <CircularProgress />
-                            </Box>
-                        </div>
-                    )} */}
+          {isLoading && (
+          <div className="w-full flex justify-center">
+            <Box sx={{ display: 'flex justify-center' }}>
+              <LinearProgress />
+              </Box>
+              </div>
+              )}
           <MyTable columns={columns} rows={rows}></MyTable>
         </div>
       </div>
