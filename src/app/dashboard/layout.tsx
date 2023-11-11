@@ -4,6 +4,8 @@ import NavBar from "../components/user/dashboard/navbar";
 import { auth } from "@/firebase/clientApp";
 import { User } from "firebase/auth";
 import { useState, useEffect, ReactNode } from "react";
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 
 const Layout = ({ children }: { children: ReactNode }) => {
   // TODO: What the hell is this?
@@ -51,7 +53,11 @@ const Layout = ({ children }: { children: ReactNode }) => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <>
+    <Box sx={{ width: '100%' }}>
+      <LinearProgress />
+    </Box>
+    </>;
   }
 
   if (!user || !accessToken) {
