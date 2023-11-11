@@ -60,22 +60,15 @@ const Layout = ({ children }: { children: ReactNode }) => {
 
   return (
     <>
-      <NavBar sidebar={sidebar} toggleSidebar={toggleSidebar}></NavBar>
+      <NavBar sidebar={sidebar} toggleSidebar={toggleSidebar} email={user.email!} photo={user.photoURL!} ></NavBar>
       <div className={`bg-[#f8fff8] ${sidebar === "active" ? "lg:pl-64" : ""}`}>
         <div className="min-h-screen p-8 pt-24">
           {/* Proof that user is logged in. */}
-          <h1 className="mb-4 font-semibold text-black">{user.uid}</h1>
+          {/* <h1 className="mb-4 font-semibold text-black">{user.uid}</h1>
           <h1 className="mb-4 font-semibold text-black">{accessToken}</h1>
           <h1 className="mb-4 font-semibold text-black">{user.displayName}</h1>
           <h1 className="mb-4 font-semibold text-black">{user.phoneNumber}</h1>
-          <h1 className="mb-4 font-semibold text-black">{user.email}</h1>
-          <img
-            alt="avatar"
-            className="mb-4 h-64 w-64"
-            referrerPolicy="no-referrer"
-            src={user.photoURL || undefined}
-          />
-
+          <h1 className="mb-4 font-semibold text-black">{user.email}</h1> */}
           {children}
         </div>
       </div>

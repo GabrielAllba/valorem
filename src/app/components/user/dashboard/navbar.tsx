@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 /* eslint-disable no-unused-vars */
 
-const NavBar = ({ sidebar, toggleSidebar }: { sidebar: string; toggleSidebar: () => void }) => {
+const NavBar = ({ sidebar, toggleSidebar, email, photo }: { sidebar: string; toggleSidebar: () => void; email: string, photo: string }) => {
   const [mobile, setMobile] = useState(false);
   const updateMobile = () => {
     if (window.innerWidth < 1024) {
@@ -40,20 +40,16 @@ const NavBar = ({ sidebar, toggleSidebar }: { sidebar: string; toggleSidebar: ()
                   <div className="flex flex-shrink-0 items-center">
                     <h1 className="font-bold text-[#1D6363]">valorem</h1>
                   </div>
-                  <div className="flex">
-                    <div className="relative h-8 w-8 overflow-hidden rounded-full bg-gray-100">
-                      <svg
-                        className="absolute -left-1 h-10 w-10 text-gray-400"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path>
-                      </svg>
-                    </div>
+                  <div className="flex items-center">
+                    
+                    <img
+                    alt="avatar"
+                    className="h-10 w-10 rounded-full"
+                    referrerPolicy="no-referrer"
+                    src={photo || undefined}></img>
 
                     <div className="hidden items-center space-x-4 md:flex">
-                      <p className="pl-3 text-black">gabriel@gmail.com</p>
+                      <p className="pl-3 text-black">{email}</p>
                     </div>
                     <button
                       aria-controls="separator-sidebar"
