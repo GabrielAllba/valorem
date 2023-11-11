@@ -1,4 +1,4 @@
-import Image from "next/image"
+import Image from "next/image";
 
 const DetailPaten = () => {
   return (
@@ -207,7 +207,7 @@ const DetailPaten = () => {
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default DetailPaten
+export default DetailPaten;

@@ -717,6 +717,6 @@ const Paten = () => {
         </Dialog>
       </Transition.Root>
     </>
-  )
-}
-export default Paten
+  );
+};
+export default Paten;

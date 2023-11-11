@@ -7,39 +7,6 @@ import { collection, getDocs } from "firebase/firestore";
 import * as React from "react";
 import { useState, useEffect } from "react";
 
-
-interface Pencipta {
-  id: number | string;
-  nama: string;
-  alamat: string;
-  nomor_telepon: string;
-  email: string;
-  kewarganegaraan: string;
-}
-interface DetailPermohonan {
-  id: number | string;
-  tipe: string;
-  nama_ciptaan: string;
-  deskripsi_singkat: string;
-  deskripsi: string;
-  tanggal_pertama_diumumkan: string;
-  negara_pertama_diumumkan: string;
-}
-
-interface Kuasa {
-  id: number | string;
-  nama_kuasa: string;
-  alamat_kuasa: string;
-  email_kuasa: string;
-}
-
-interface Lampiran {
-  id: number | string;
-  surat_pernyataan: string;
-  ktp_pencipta: string;
-  surat_kuasa?: string;
-}
-
 interface ShowData {
   id: number | string;
   tipe: string;

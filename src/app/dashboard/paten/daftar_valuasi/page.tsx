@@ -1,5 +1,4 @@
 "use client";
-
 import { TablePagination, tablePaginationClasses as classes } from "@mui/base/TablePagination";
 import { styled } from "@mui/system";
 import Link from "next/link";
@@ -104,7 +103,7 @@ const DaftarValuasiPaten = () => {
       </div>
     </Root>
   );
-}
+};
 
 function createData(
   no_valuasi: string,
@@ -195,4 +194,4 @@ const CustomTablePagination = styled(TablePagination)`
   }
 `;
 
-export default DaftarValuasiPaten
+export default DaftarValuasiPaten;
