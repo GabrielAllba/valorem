@@ -132,6 +132,10 @@ const NavigationBar = () => {
       .catch(() => {});
   };
 
+  const handleDashboard = () => {
+    router.push("/dashboard");
+  };
+
   return (
     <>
       <Modal message={message} onClose={() => setOpen(false)} show={open} tipe={tipe}></Modal>
@@ -269,6 +273,12 @@ const NavigationBar = () => {
                           >
                             Logout
                           </button>
+                          <button
+                            className="rounded-xl  bg-[#1D6363] px-4 py-2 text-white hover:bg-[#287979]"
+                            onClick={handleDashboard}
+                          >
+                            Dashboard
+                          </button>
                         </>
                       )}
                     </div>
@@ -384,20 +394,23 @@ const NavigationBar = () => {
                       >
                         Login
                       </button>
-                      {/* <button className="bg-[#1D6363] hover:bg-[#236c6c] text-white py-2 px-4 rounded-xl">
-                                                Sign up
-                                            </button> */}
                     </>
                   )}
                   {login == "login" && (
-                    <>
+                    <div className="py-2">
                       <button
                         className="rounded-xl border border-[#ECECEC] bg-white px-4 py-2 text-[#1D6363] "
                         onClick={handleLogout}
                       >
                         Logout
                       </button>
-                    </>
+                      <button
+                        className="rounded-xl ml-2 bg-[#1D6363] px-4 py-2 text-white hover:bg-[#287979]"
+                        onClick={handleDashboard}
+                      >
+                        Dashboard
+                      </button>
+                    </div>
                   )}
                 </div>
               </div>

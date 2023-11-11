@@ -4,10 +4,14 @@ import { Disclosure } from "@headlessui/react";
 import { StarIcon, DocumentIcon, ArrowLeftOnRectangleIcon} from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { signOut } from "firebase/auth";
+import { auth } from "@/firebase/clientApp";
+import { useRouter } from "next/navigation";
 
 /* eslint-disable no-unused-vars */
 
 const NavBar = ({ sidebar, toggleSidebar, email, photo }: { sidebar: string; toggleSidebar: () => void; email: string, photo: string }) => {
+  const router = useRouter();  
   const [mobile, setMobile] = useState(false);
   const updateMobile = () => {
     if (window.innerWidth < 1024) {
@@ -25,6 +29,12 @@ const NavBar = ({ sidebar, toggleSidebar, email, photo }: { sidebar: string; tog
       window.removeEventListener("resize", updateMobile);
     };
   }, []);
+  
+  const handleLogout = () => {
+    signOut(auth).then(() => {
+      router.push("/");
+    }).catch(() => {});
+  };
 
   return (
     <>
@@ -172,7 +182,7 @@ const NavBar = ({ sidebar, toggleSidebar, email, photo }: { sidebar: string; tog
                         onClick={mobile ? toggleSidebar : undefined}
                       >
                         <ArrowLeftOnRectangleIcon className="h-4 w-4"></ArrowLeftOnRectangleIcon>
-                        <span className="ml-3 flex-1 whitespace-nowrap">Log Out</span>
+                        <span className="ml-3 flex-1 whitespace-nowrap" onClick={handleLogout}>Log Out</span>
                       </Link>
                     </li>
                   </div>
@@ -185,5 +195,7 @@ const NavBar = ({ sidebar, toggleSidebar, email, photo }: { sidebar: string; tog
     </>
   );
 };
+
+
 
 export default NavBar;
