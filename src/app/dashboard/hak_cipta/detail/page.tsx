@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/image"
 
 const DetailHakCipta = () => {
   return (
@@ -219,7 +219,7 @@ const DetailHakCipta = () => {
         </div>
       </section>
     </>
-  );
+  )
 }
 
 export default DetailHakCipta

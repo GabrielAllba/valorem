@@ -40,14 +40,6 @@ interface Lampiran {
   surat_kuasa?: string;
 }
 
-interface ValuasiHakCipta {
-  id: number | string;
-  detail_permohonan: DetailPermohonan;
-  pencipta: Pencipta[];
-  lampiran: Lampiran;
-  kuasa?: Kuasa;
-  nilai_valuasi: number;
-}
 interface ShowData {
   id: number | string;
   tipe: string;
@@ -132,6 +124,7 @@ const DaftarValuasiHakCipta = () => {
           tipe,
         } = detail_permohonan;
         return {
+          key: doc.id,
           id: doc.id,
           deskripsi,
           deskripsi_singkat,

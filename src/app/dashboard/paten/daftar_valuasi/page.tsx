@@ -5,7 +5,7 @@ import { styled } from "@mui/system";
 import Link from "next/link";
 import * as React from "react";
 
-export default function DaftarValuasiPaten() {
+const DaftarValuasiPaten = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -194,3 +194,5 @@ const CustomTablePagination = styled(TablePagination)`
     gap: 0.25rem;
   }
 `;
+
+export default DaftarValuasiPaten

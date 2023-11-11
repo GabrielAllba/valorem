@@ -81,17 +81,11 @@ const kewarganegaran = [
 
 const Paten = () => {
   const [selected, setSelected] = useState(paten[0]);
-
-
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
-
   const [selectedKewarganegaraan, setSelectedKewarganegaraan] = useState(kewarganegaran[0].name);
-
   const [openInventor, setOpenInventor] = useState(false);
   const cancelButtonRefInventor = useRef(null);
-
-  
 
   return (
     <>
@@ -723,6 +717,6 @@ const Paten = () => {
         </Dialog>
       </Transition.Root>
     </>
-  );
+  )
 }
 export default Paten
