@@ -1,5 +1,7 @@
 "use client";
+
 import { TablePagination, tablePaginationClasses as classes } from "@mui/base/TablePagination";
+
 import { styled } from "@mui/system";
 import Link from "next/link";
 import * as React from "react";

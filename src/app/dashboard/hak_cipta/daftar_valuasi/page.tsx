@@ -69,12 +69,11 @@ const DaftarValuasiHakCipta = () => {
       field: "actions",
       type: "actions",
       width: 200,
-      getActions: () => [<GridActionsCellItem icon={<RemoveRedEyeIcon />} label="Edit" />],
+      getActions: (params) => [<GridActionsCellItem icon={<RemoveRedEyeIcon />} label="Edit" key={params.id}/>],
     },
   ];
 
   const [rows, setRows] = useState<ShowData[]>([]);
-
 
   useEffect(() => {
     const getValuasiData = async () => {
