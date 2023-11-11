@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function DetailHakCipta() {
+const DetailHakCipta = () => {
   return (
     <>
       <section className="bg-white  font-poppins">
@@ -221,3 +221,5 @@ export default function DetailHakCipta() {
     </>
   );
 }
+
+export default DetailHakCipta

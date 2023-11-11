@@ -2,17 +2,11 @@
 
 import { db } from "@/firebase/clientApp";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
 import { DataGrid, GridActionsCellItem, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { collection, getDocs } from "firebase/firestore";
 import * as React from "react";
 import { useState, useEffect } from "react";
 
-interface Kewarganegaraan {
-  id: number | string;
-  nama: string;
-}
 
 interface Pencipta {
   id: number | string;
@@ -121,14 +115,14 @@ const DaftarValuasiHakCipta = () => {
   ];
 
   const [rows, setRows] = useState<ShowData[]>([]);
-  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     const getValuasiData = async () => {
       const querySnapshot = await getDocs(collection(db, "valuasi_hak_cipta"));
 
       const rows = querySnapshot.docs.map((doc) => {
-        const { detail_permohonan, pencipta, lampiran, kuasa, nilai_valuasi } = doc.data();
+        const { detail_permohonan, nilai_valuasi } = doc.data();
         const {
           deskripsi,
           deskripsi_singkat,

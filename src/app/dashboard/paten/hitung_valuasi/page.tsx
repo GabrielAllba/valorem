@@ -79,9 +79,9 @@ const kewarganegaran = [
   { id: 2, name: "Amerika" },
 ];
 
-export default function Paten() {
+const Paten = () => {
   const [selected, setSelected] = useState(paten[0]);
-  const [selectedOption, setSelectedOption] = useState("yes");
+
 
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
@@ -91,9 +91,7 @@ export default function Paten() {
   const [openInventor, setOpenInventor] = useState(false);
   const cancelButtonRefInventor = useRef(null);
 
-  const handleRadioChange = (e: any) => {
-    setSelectedOption(e.target.value);
-  };
+  
 
   return (
     <>
@@ -727,3 +725,4 @@ export default function Paten() {
     </>
   );
 }
+export default Paten

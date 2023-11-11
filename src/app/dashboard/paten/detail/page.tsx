@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function DetailPaten() {
+const DetailPaten = () => {
   return (
     <>
       <section className="bg-white  font-poppins">
@@ -209,3 +209,5 @@ export default function DetailPaten() {
     </>
   );
 }
+
+export default DetailPaten
