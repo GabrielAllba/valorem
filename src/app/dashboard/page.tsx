@@ -62,8 +62,24 @@ interface ValuasiHakCipta {
 }
 
 const hak_cipta = [
-  { id: 1, nama: "Buku" },
-  { id: 2, nama: "Lagu" },
+  { id: 1, nama: "buku, pamflet, perwajahan karya tulis" },
+  { id: 2, nama: "ceramah, kuliah, pidato" },
+  { id: 3, nama: "alat peraga yang dibuat untuk kepentingan pendidikan dan ilmu pengetahuan" },
+  { id: 4, nama: "lagu dan/atau musik dengan atau tanpa teks" },
+  { id: 5, nama: "drama, tari, koreografi, perwayangan, pantonim" },
+  { id: 6, nama: "karya seni rupa" },
+  { id: 7, nama: "karya seni terapan" },
+  { id: 8, nama: "karya arsitektur" },
+  { id: 9, nama: "peta" },
+  { id: 10, nama: "karya seni batik" },
+  { id: 11, nama: "karya fotografi" },
+  { id: 12, nama: "potret" },
+  { id: 13, nama: "karya sinematografi" },
+  { id: 14, nama: "terjemahan, tafsir, saduran, bunga, basis data, adaptasi" },
+  { id: 15, nama: "permainan video" },
+  { id: 16, nama: "program komputer" },
+  { id: 17, nama: "kompilasi ekspresi budaya tradisional" },
+  { id: 18, nama: "kompilasi ciptaan atau data" },
 ];
 
 const kewarganegaraan: Kewarganegaraan[] = [
