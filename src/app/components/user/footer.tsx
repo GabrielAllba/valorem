@@ -2,14 +2,16 @@ const Footer = () => {
   return (
     <footer className="bg-[#161C28] px-20 py-20 font-poppins">
       <div className="mx-auto w-full ">
-        <div className="grid grid-cols-1 gap-8 py-6 md:grid-cols-4 lg:py-8">
+        <div className="grid grid-cols-1 gap-4 py-6 md:grid-cols-5 lg:py-8">
           <div>
             <h2 className="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">
               Valorem
             </h2>
             <ul className="font-medium text-gray-500 dark:text-gray-400">
               <li className="mb-4">
-                <p>Yuk, mulai lihat valuasi kekayaan intelektual kamu!</p>
+                <p>
+                  Mrican, Caturtunggal, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta
+                </p>
               </li>
             </ul>
           </div>
@@ -43,6 +45,23 @@ const Footer = () => {
               <li className="mb-4">
                 <a className="hover:underline" href="#">
                   Tujuan Valuasi
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h2 className="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">
+              Kontak
+            </h2>
+            <ul className="font-medium text-gray-500 dark:text-gray-400">
+              <li className="mb-4">
+                <a className="hover:underline" href="#">
+                  Official Kontak 1
+                </a>
+              </li>
+              <li className="mb-4">
+                <a className="hover:underline" href="#">
+                  Official Kontak 2
                 </a>
               </li>
             </ul>
