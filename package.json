@@ -12,8 +12,8 @@
     "format": "prettier --write .",
     "preinstall": "npx only-allow pnpm",
     "lint": "next lint",
-    "start": "next start",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "start": "next start"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",

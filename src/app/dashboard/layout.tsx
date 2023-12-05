@@ -2,10 +2,10 @@
 
 import NavBar from "../components/user/dashboard/navbar";
 import { auth } from "@/firebase/clientApp";
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
 import { User } from "firebase/auth";
 import { useState, useEffect, ReactNode } from "react";
-import Box from '@mui/material/Box';
-import LinearProgress from '@mui/material/LinearProgress';
 
 const Layout = ({ children }: { children: ReactNode }) => {
   // TODO: What the hell is this?
@@ -53,11 +53,13 @@ const Layout = ({ children }: { children: ReactNode }) => {
   };
 
   if (isLoading) {
-    return <>
-    <Box sx={{ width: '100%' }}>
-      <LinearProgress />
-    </Box>
-    </>;
+    return (
+      <>
+        <Box sx={{ width: "100%" }}>
+          <LinearProgress />
+        </Box>
+      </>
+    );
   }
 
   if (!user || !accessToken) {
@@ -66,7 +68,12 @@ const Layout = ({ children }: { children: ReactNode }) => {
 
   return (
     <>
-      <NavBar sidebar={sidebar} toggleSidebar={toggleSidebar} email={user.email!} photo={user.photoURL!} ></NavBar>
+      <NavBar
+        sidebar={sidebar}
+        toggleSidebar={toggleSidebar}
+        email={user.email!}
+        photo={user.photoURL!}
+      ></NavBar>
       <div className={`bg-[#f8fff8] ${sidebar === "active" ? "lg:pl-64" : ""}`}>
         <div className="min-h-screen p-8 pt-24">
           {/* Proof that user is logged in. */}

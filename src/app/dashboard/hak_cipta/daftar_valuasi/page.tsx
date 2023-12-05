@@ -72,7 +72,9 @@ const DaftarValuasiHakCipta = () => {
       field: "actions",
       type: "actions",
       width: 200,
-      getActions: (params) => [<GridActionsCellItem icon={<RemoveRedEyeIcon />} label="Edit" key={params.id}/>],
+      getActions: (params) => [
+        <GridActionsCellItem icon={<RemoveRedEyeIcon />} label="Edit" key={params.id} />,
+      ],
     },
   ];
 
@@ -80,7 +82,6 @@ const DaftarValuasiHakCipta = () => {
 
   useEffect(() => {
     const getValuasiData = async () => {
-      
       const querySnapshot = await getDocs(collection(db, "valuasi_hak_cipta"));
 
       const rows = querySnapshot.docs.map((doc) => {
@@ -111,7 +112,7 @@ const DaftarValuasiHakCipta = () => {
     getValuasiData();
     setIsLoading(false);
   }, []);
-  
+
   return (
     <div className="bg-white text-black shadow-lg">
       <div className=" bg-white">
@@ -120,12 +121,12 @@ const DaftarValuasiHakCipta = () => {
         </div>
         <div className="overflow-auto p-4">
           {isLoading && (
-          <div className="w-full flex justify-center">
-            <Box sx={{ display: 'flex justify-center' }}>
-              <LinearProgress />
+            <div className="flex w-full justify-center">
+              <Box sx={{ display: "flex justify-center" }}>
+                <LinearProgress />
               </Box>
-              </div>
-              )}
+            </div>
+          )}
           <MyTable columns={columns} rows={rows}></MyTable>
         </div>
       </div>
