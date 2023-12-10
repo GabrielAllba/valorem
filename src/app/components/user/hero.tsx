@@ -14,13 +14,41 @@ const permohonan = [
 const Hero = () => {
     const [selected, setSelected] = useState(permohonan[0]);
 
+    const [faqOne, setFaqOne] = useState(false);
+    const [faqTwo, setFaqTwo] = useState(false);
+    const [faqThree, setFaqThree] = useState(false);
+
+    const handleOne = () => {
+        setFaqOne(!faqOne);
+        setFaqTwo(false);
+        setFaqThree(false);
+    };
+    const handleTwo = () => {
+        setFaqOne(false);
+        setFaqTwo(!faqTwo);
+        setFaqThree(false);
+    };
+    const handleThree = () => {
+        setFaqOne(false);
+        setFaqTwo(false);
+        setFaqThree(!faqThree);
+    };
+    const listThree = [
+        'Tujuan dari jasa adalah untuk memvalidasi dan menghitung nilai dari Hak Cipta dan Hak Paten.',
+        'Setiap pengguna baik individu maupun badan hukum memahami proses valuasi sertifikat Hak Cipta dan Hak Paten bersifat mengikat sampai dapat dijadikan agungan di lembaga perbankan',
+        'Setiap pengguna baik individu maupun badan hukum memahami bahwa ketika ada perbedaan valuasi oleh lembaga lain, maka yang berlaku adalah hasil valuasi dari Valorem.',
+        'Setiap Hak Cipta dan Hak Paten yang diajukan oleh pengguna dilindungi oleh Valorem kepada pihak ketiga tanpa persetujuan dari pemegang hak tersebut.',
+        'Setiap data pribadi pengguna yang dimasukan dalam sistem Harmonies Livin akan dilindungi oleh ketentuan data pribadi sesuai dengan regulasi yang ada di Indonesia.',
+        'Harmonies Livin tidak bertanggung jawab jika terjadi penolakan pengajuan kredit oleh lembaga perbankan karena hasil valuasi dari penggunaan jasa Valorem.',
+    ];
+
     return (
         <section className="bg-white py-16">
             <div className="py-4">
-                <p className="bg-[#ffe1e1] text-center text-[#f35757] py-2">Testing Program Lawful Dreamer FH UAJY</p>
+                <p className="bg-[#ffe1e1] py-2 text-center text-[#f35757]">Testing Program Lawful Dreamer FH UAJY</p>
             </div>
             <div className="mx-auto grid max-w-screen-xl px-8 py-8 lg:grid-cols-12 lg:gap-8 lg:py-16 xl:gap-0">
-                <div className="mr-auto place-self-center lg:col-span-7">
+                <div className="mr-auto place-self-center lg:col-span-6">
                     <span className="mb-4 inline-flex items-center rounded-md bg-green-50 px-4 py-2 font-poppins text-xs font-medium text-green-700  ring-1 ring-inset ring-green-600/20">
                         Valuasi Kekayaan Intelektual
                     </span>
@@ -46,106 +74,107 @@ const Hero = () => {
                         </svg>
                     </a>
                 </div>
-                <div className="mt-4 lg:col-span-5 lg:mt-0 lg:flex lg:justify-center">
-                    <div className="max-w-sm rounded-lg border border-gray-200 bg-white shadow">
-                        <a href="#">
-                            <Image alt="" className="rounded-t-lg" height={500} src="/img/hero.png" width={500} />
-                        </a>
+                <div className="mt-4 col-span-6 lg:mt-0 lg:flex lg:justify-center p-4">
+                    <div className="rounded-lg border border-gray-200 bg-white shadow h-min">
                         <div className="p-5">
                             <a href="#">
                                 <h5 className="mb-2 font-poppins text-lg font-semibold tracking-tight text-black">
-                                    Yuk, telusuri data valuasi kekayaan intelektual!{' '}
+                                    FAQ
                                 </h5>
                             </a>
 
                             <form>
                                 <div className="mb-2 mt-4">
                                     <label
-                                        className="mb-2 block font-poppins text-sm font-medium text-[#111827]"
+                                        className="font-poppins text-sm font-medium text-[#111827] flex items-center justify-between cursor-pointer"
                                         htmlFor="kata_kunci"
+                                        onClick={handleOne}
                                     >
-                                        Kata kunci
-                                    </label>
-                                    <input
-                                        className=" block w-full rounded-lg border border-[#DADDE2]  p-2.5 font-poppins text-sm text-gray-900 outline-none"
-                                        id="kata_kunci"
-                                        placeholder="Kata kunci"
-                                        type="text"
-                                    ></input>
-                                </div>
-                                <div className="">
-                                    <label
-                                        className="mb-2 block font-poppins text-sm font-medium text-[#111827]"
-                                        htmlFor="password"
-                                    >
-                                        Tipe
-                                    </label>
-                                </div>
-                                <div className="">
-                                    <Listbox onChange={setSelected} value={selected}>
-                                        <div className="relative mt-1">
-                                            <Listbox.Button className="relative block w-full cursor-default rounded-lg border border-[#DADDE2] bg-white  p-2.5  pl-3  pr-10  text-left text-sm text-gray-900 focus:outline-none  focus-visible:ring-offset-2 sm:text-sm ">
-                                                <span className="block truncate text-[#555555]">{selected.name}</span>
-                                                <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                                                    <ChevronUpDownIcon
-                                                        aria-hidden="true"
-                                                        className="h-5 w-5 text-gray-400"
-                                                    />
-                                                </span>
-                                            </Listbox.Button>
-                                            <Transition
-                                                as={Fragment}
-                                                leave="transition ease-in duration-100"
-                                                leaveFrom="opacity-100"
-                                                leaveTo="opacity-0"
-                                            >
-                                                <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
-                                                    {permohonan.map((item, personIdx) => (
-                                                        <Listbox.Option
-                                                            className={({ active }) =>
-                                                                `relative cursor-default select-none py-2 pl-10 pr-4 font-poppins ${
-                                                                    active
-                                                                        ? 'bg-[#F0F8EE] text-[#1D6363]'
-                                                                        : 'font-poppins text-black'
-                                                                }`
-                                                            }
-                                                            key={personIdx}
-                                                            value={item}
-                                                        >
-                                                            {({ selected }) => (
-                                                                <>
-                                                                    <span
-                                                                        className={`block truncate ${
-                                                                            selected ? 'font-medium ' : 'font-normal'
-                                                                        }`}
-                                                                    >
-                                                                        {item.name}
-                                                                    </span>
-                                                                    {selected ? (
-                                                                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-[#1D6363]">
-                                                                            <CheckIcon
-                                                                                aria-hidden="true"
-                                                                                className="h-5 w-5"
-                                                                            />
-                                                                        </span>
-                                                                    ) : null}
-                                                                </>
-                                                            )}
-                                                        </Listbox.Option>
-                                                    ))}
-                                                </Listbox.Options>
-                                            </Transition>
-                                        </div>
-                                    </Listbox>
-                                </div>
+                                        <b>
+                                            <span>1. Apa itu jaminan fidusia?</span>
+                                        </b>
 
-                                <div className="flex items-center justify-end">
-                                    <Link
-                                        className="mt-4 w-full rounded-lg bg-[#1D6363]  px-5 py-2.5 text-center font-poppins text-sm font-medium text-white outline-none  hover:bg-[#236f6f] sm:w-auto"
-                                        href="/hasil_pencarian"
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            className="bi bi-chevron-down"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                                        </svg>
+                                    </label>
+                                    {faqOne && (
+                                        <div>
+                                            <p className="text-black">
+                                                pengalihan hak kepemilikan suatu benda atas dasar kepercayaan dengan
+                                                ketentuan bahwa benda yang hak kepemilikannya dialihkan tersebut tetap
+                                                dalam penguasaan pemilik benda.
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="mb-2">
+                                    <label
+                                        className="font-poppins text-sm font-medium text-[#111827] flex items-center justify-between cursor-pointer"
+                                        htmlFor="password"
+                                        onClick={handleTwo}
                                     >
-                                        Cari
-                                    </Link>
+                                        <b>
+                                            <span>
+                                                2. Apa saja Hak Kekayaan Intelektual yang dapat dijadikan jaminan
+                                                fidusia?
+                                            </span>
+                                        </b>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            className="bi bi-chevron-down"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                                        </svg>
+                                    </label>
+                                    {faqTwo && (
+                                        <div>
+                                            <p className="text-black">2. ⁠Hak Cipta dan Paten</p>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="mb-2">
+                                    <label
+                                        className="font-poppins text-sm font-medium text-[#111827] flex items-center justify-between cursor-pointer"
+                                        htmlFor="password"
+                                        onClick={handleThree}
+                                    >
+                                        <b>
+                                            <span>3. Apa saja Syarat dan Ketentuan penggunaan jasa Valorem</span>
+                                        </b>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            className="bi bi-chevron-down"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                                        </svg>
+                                    </label>
+                                    {faqThree && (
+                                        <div>
+                                            <div className="text-black">
+                                                <ul className="list-disc px-4">
+                                                    {listThree.map((item) => (
+                                                        <li key={item}>{item}</li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             </form>
                         </div>
