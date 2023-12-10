@@ -1,10 +1,6 @@
 'use client';
 
-import { Listbox, Transition } from '@headlessui/react';
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 
 const permohonan = [
     { id: 1, name: 'Paten' },
@@ -74,8 +70,8 @@ const Hero = () => {
                         </svg>
                     </a>
                 </div>
-                <div className="mt-4 col-span-6 lg:mt-0 lg:flex lg:justify-center p-4">
-                    <div className="rounded-lg border border-gray-200 bg-white shadow h-min">
+                <div className="col-span-6 mt-4 p-4 lg:mt-0 lg:flex lg:justify-center">
+                    <div className="h-min rounded-lg border border-gray-200 bg-white shadow">
                         <div className="p-5">
                             <a href="#">
                                 <h5 className="mb-2 font-poppins text-lg font-semibold tracking-tight text-black">
@@ -86,7 +82,7 @@ const Hero = () => {
                             <form>
                                 <div className="mb-2 mt-4">
                                     <label
-                                        className="font-poppins text-sm font-medium text-[#111827] flex items-center justify-between cursor-pointer"
+                                        className="flex cursor-pointer items-center justify-between font-poppins text-sm font-medium text-[#111827]"
                                         htmlFor="kata_kunci"
                                         onClick={handleOne}
                                     >
@@ -117,7 +113,7 @@ const Hero = () => {
                                 </div>
                                 <div className="mb-2">
                                     <label
-                                        className="font-poppins text-sm font-medium text-[#111827] flex items-center justify-between cursor-pointer"
+                                        className="flex cursor-pointer items-center justify-between font-poppins text-sm font-medium text-[#111827]"
                                         htmlFor="password"
                                         onClick={handleTwo}
                                     >
@@ -146,7 +142,7 @@ const Hero = () => {
                                 </div>
                                 <div className="mb-2">
                                     <label
-                                        className="font-poppins text-sm font-medium text-[#111827] flex items-center justify-between cursor-pointer"
+                                        className="flex cursor-pointer items-center justify-between font-poppins text-sm font-medium text-[#111827]"
                                         htmlFor="password"
                                         onClick={handleThree}
                                     >
